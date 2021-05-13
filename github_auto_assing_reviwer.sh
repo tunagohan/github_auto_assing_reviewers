@@ -39,13 +39,13 @@ function environments_check() {
 function members_to_array_str() {
   members_original=( `echo $REVIEWER_MEMBERS | tr -s ':' ' '`)
 
-  tmp='['
+  tmp=
 
   for member in "${members_original[@]}" ; do
     tmp+="\"${member}\","
   done
 
-  members+=${tmp/%?/}']'
+  members+=${tmp/%?/}
 }
 
 function final_check_log() {
@@ -54,12 +54,13 @@ function final_check_log() {
 
   log "Reviewers:\n"
   log "> ${members}\n"
+
+  log "Your Paste And Run:"
+  log "> curl -X POST -u :\$GITHUB_TOKEN -H \"Accept: application/vnd.github.v3+json\" \"https://${GITHUB_API}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/requested_reviewers\" -d '{\"reviewers\":[${members}]}'"
 }
 
 function send_api() {
-  curl -X POST -u :${GITHUB_TOKEN} \
-    "https://${GITHUB_API}/repos/${REPOSITORY}/pulls/${PR_NUMBER}/requested_reviewers" \
-    -d "{\"reviewers\":${members}}"
+  eval "curl -X POST -u :\$GITHUB_TOKEN -H \"Accept: application/vnd.github.v3+json\" \"https://${GITHUB_API}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/requested_reviewers\" -d '{\"reviewers\":[${members}]}'"
 }
 
 # check enviroments
