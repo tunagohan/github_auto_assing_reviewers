@@ -13,7 +13,7 @@ cat <<- EOS
   Recommended is direnv.
 
   export GITHUB_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  export REVIEWER_MEMBERS=[jonh:michael:apple:sushi]
+  export REVIEWER_MEMBERS=jonh:michael:apple:sushi
   export GITHUB_REPOSITORY=<name>/<repo name>
 
   [Terminal] $ ./github_auto_assing_reviwer.sh
@@ -50,7 +50,7 @@ function members_to_array_str() {
 
 function final_check_log() {
   log "endpoint:\n"
-  log "> https://${GITHUB_API}/repos/${REPOSITORY}/pulls/${PR_NUMBER}/requested_reviewers \n"
+  log "> https://${GITHUB_API}/repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/requested_reviewers \n"
 
   log "Reviewers:\n"
   log "> ${members}\n"
@@ -91,4 +91,3 @@ case "$yn" in
            exit 1
            ;;
 esac
-

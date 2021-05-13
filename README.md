@@ -8,7 +8,7 @@ Recommended is direnv.
 
 ```
 export GITHUB_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export REVIEWER_MEMBERS=[jonh:michael:apple:sushi]
+export REVIEWER_MEMBERS=jonh:michael:apple:sushi
 export GITHUB_REPOSITORY=<name>/<repo name>
 ```
 
